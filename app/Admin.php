@@ -40,4 +40,9 @@ class Admin extends Authenticatable
     {
         $this->notify(new AdminResetPassword($token));
     }
+
+
+    public function getAuthPassword(){
+        return $this->senha;
+    }
 }

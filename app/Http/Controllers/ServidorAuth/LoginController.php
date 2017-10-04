@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Hesto\MultiAuth\Traits\LogsoutGuard;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -49,6 +50,11 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         return view('servidor.auth.login');
+    }
+
+    protected function attemptLogin(Request $request)
+    {
+        return Auth::guard('servidor')->attempt(['email' => $request->all()['email'], 'password' => $request->all()['senha']]);
     }
 
     protected function validateLogin(Request $request)

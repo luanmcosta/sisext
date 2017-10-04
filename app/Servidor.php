@@ -40,4 +40,8 @@ class Servidor extends Authenticatable
     {
         $this->notify(new ServidorResetPassword($token));
     }
+
+    public function getAuthPassword(){
+        return $this->senha;
+    }
 }
