@@ -5,7 +5,7 @@
     <title>Cadastro de filial</title>
   </head>
   <body>
-    <form class="" action="{{route('filial.store')}}" method="POST">
+    <form class="" action="{{route('acao.store')}}" method="POST">
       <h4>Autor: <input type="text" name="autor"></h4>
       <h4>Nome: <input type="text" name="nome"></h4>
       <h4>Descricao: <input type="text" name="descricao"></h4>
