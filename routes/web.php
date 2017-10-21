@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('acao', 'AcaoController');
+Route::resource('relatorio', 'RelatorioController');
 
 Route::group(['prefix' => 'admin'], function () {
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
