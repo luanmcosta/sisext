@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{asset('/css/app.css')}}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">    
 
     <!-- Scripts -->
     <script>
@@ -34,7 +35,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/admin') }}">
+                <a class="navbar-brand" href="{{ url('/admin/home') }}">
                     {{ config('app.name', 'Laravel Multi Auth Guard') }}: Admin
                 </a>
             </div>
@@ -52,10 +53,19 @@
                         <li><a href="{{ url('/admin/login') }}">Login</a></li>
                         <li><a href="{{ url('/admin/register') }}">Register</a></li>
                     @else
+                        <li class="active"><a href="#"><i class="material-icons">home</i>Home</a></li>
+                        <li><a href="#"><i class="material-icons">event</i>Ações</a></li>
+                        <li><a href="#"><i class="material-icons">perm_identity</i>Usuários</a></li>
+                        <li><a href="#"><i class="material-icons">build</i>Configurações</a></li>
                         <li class="dropdown">
+
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
+
+                            <!-- <div class="nav navbar-nav"> -->
+                                
+                            <!-- </div> -->
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>

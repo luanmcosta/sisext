@@ -28,6 +28,7 @@ class ComposerAutoloaderInit8bddae5c0844cd939661964656c6804e
             require_once __DIR__ . '/autoload_static.php';
 
             call_user_func(\Composer\Autoload\ComposerStaticInit8bddae5c0844cd939661964656c6804e::getInitializer($loader));
+
         } else {
             $map = require __DIR__ . '/autoload_namespaces.php';
             foreach ($map as $namespace => $path) {
