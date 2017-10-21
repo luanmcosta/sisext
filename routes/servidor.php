@@ -10,3 +10,6 @@ Route::get('/home', function () {
     return view('servidor.home');
 })->name('home');
 
+Route::get('/create', 'ServidorController@create');
+
+Route::get('/show','ServidorController@show');
