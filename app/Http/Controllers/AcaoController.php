@@ -28,7 +28,11 @@ class AcaoController extends Controller
     }
 
     public function show(){
-
+      // $valores = Acao::all();
+      $acoes = $this->acao->all();
+      // print_r($valores);
+      echo "boa noite";
+      // return view(url('/admin/login'), compact('objetos'));
     }
 
     public function store(Request $r){
