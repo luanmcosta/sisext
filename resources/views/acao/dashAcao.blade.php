@@ -8,6 +8,13 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
+                    <div class="text-right">
+                        <button class="btn btn-success" data-toggle="modal" style=" color: #FFF; margin-left: 15px;">
+                            <strong>+</strong> Novo
+                        </button>                        
+                    </div>
+
+
                     @if(count($acoes)==0)
                         <div class="text-center" style="padding: 5px 0px;">
                             <h4>Não possui registos de <b>Ações</b></h4>
@@ -16,9 +23,27 @@
 
                     @else
                         @foreach($acoes as $obj)
-                            {{$obj->id}} <br>
-                            {{$obj->created_at}} <br>
-                            {{$obj->updated_at}} <br>
+                            <div style="border: 1px solid #ccc; width: 150px">
+                                {{$obj->id}} <br>
+                                {{$obj->created_at}} <br>
+                                {{$obj->updated_at}} <br>
+                                <div class="text-right">
+                                    <form action="{{route('acao.destroy', $obj->id)}}" method="POST" style="display: inline-block;">
+                                        {{csrf_field()}}                                        
+                                        {{method_field('DELETE')}}
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="material-icons" title="Deletar">delete</i>
+                                        </button>
+                                        <input type="hidden" name="{{$obj->id}}" id="idBD">
+                                    </form>
+
+                                    <a href="{{$obj->id}}/edit">
+                                        <button type="submit" class="btn btn-info btn-sm">
+                                            <i class="material-icons" title="Editar">create</i>
+                                        </button>
+                                    </a>                    
+                                </div>
+                            </div>
                         @endforeach
                     @endif
                 </div>

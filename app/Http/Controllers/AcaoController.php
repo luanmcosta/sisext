@@ -14,10 +14,8 @@ class AcaoController extends Controller
     }
 
     public function index(){
-    
-
       $acoes = Acao::all();
-      return view('acao.dashAcao', compact('acoes'));   
+      return view('acao.dashAcao', compact('acoes')); 
     }
 
     public function create(){
