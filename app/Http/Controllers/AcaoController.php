@@ -14,8 +14,10 @@ class AcaoController extends Controller
     }
 
     public function index(){
-      $acoes = $this->acao->all();
-      return view('acao.listar', compact('acoes'));
+    
+
+      $acoes = Acao::all();
+      return view('acao.dashAcao', compact('acoes'));   
     }
 
     public function create(){
@@ -27,12 +29,7 @@ class AcaoController extends Controller
       return view('acao.editar', compact('acao'));
     }
 
-    public function show(){
-      // $valores = Acao::all();
-      $acoes = $this->acao->all();
-      // print_r($valores);
-      echo "boa noite";
-      // return view(url('/admin/login'), compact('objetos'));
+    public function show(){   
     }
 
     public function store(Request $r){
