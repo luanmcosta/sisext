@@ -55,7 +55,7 @@
                     @else
                         <li><a href="home"><i class="material-icons">home</i>Home</a></li>
                         <li><a href="acao"><i class="material-icons">event</i>Ações</a></li>
-                        <li><a href="#"><i class="material-icons">perm_identity</i>Usuários</a></li>
+                        <li><a href="usuario"><i class="material-icons">perm_identity</i>Usuários</a></li>
                         <li><a href="#"><i class="material-icons">build</i>Configurações</a></li>
                         <li class="dropdown">
 
