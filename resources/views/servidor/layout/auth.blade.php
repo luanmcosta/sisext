@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{asset('/css/app.css')}}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -52,6 +53,10 @@
                         <li><a href="{{ url('/servidor/login') }}">Login</a></li>
                         <li><a href="{{ url('/servidor/register') }}">Register</a></li>
                     @else
+                        <li><a href="home"><i class="material-icons">home</i> Home</a></li>
+                        <li><a href="acao"><i class="material-icons">event</i> Ações</a></li>
+                        <li><a href="#"><i class="material-icons">build</i> Configurações</a></li>
+
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
