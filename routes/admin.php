@@ -5,3 +5,4 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::get('acao', 'AcaoController@index');
+Route::put('acao/{acao}', 'AcaoController@update');
