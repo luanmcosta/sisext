@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Acao;
+use App\Servidor;
 
 class AcaoController extends Controller
 {
@@ -14,12 +15,13 @@ class AcaoController extends Controller
     }
 
     public function index(){
-      $acoes = $this->acao->all();
-      return view('acao.listar', compact('acoes'));
+      $acoes = Acao::all();
+      $servidores = Servidor::all();
+      return view('acao.dashAcao', compact('acoes', 'servidores'));
     }
 
     public function create(){
-      return view('acao.novo');
+      return view('acao.novaAcao');
     }
 
     public function edit($id){
@@ -28,11 +30,6 @@ class AcaoController extends Controller
     }
 
     public function show(){
-      // $valores = Acao::all();
-      $acoes = $this->acao->all();
-      // print_r($valores);
-      echo "boa noite";
-      // return view(url('/admin/login'), compact('objetos'));
     }
 
     public function store(Request $r){
