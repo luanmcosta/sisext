@@ -26,16 +26,16 @@
                             <div style="width:170px; margin-right: 10.5px;" class="col-xs-2 well well-sm">
                               <div class="text-center">
                                 <i class="material-icons" style="font-size:100px;">event</i><br>
-                                <h4 style="margin-top: -5px; margin-bottom: -3px">{{$obj->nome}}</h4>
+                                <h4 style="margin-top: -5px; margin-bottom: -3px"><b>{{$obj->nome}}</b></h4>
                                 {{$obj->created_at->format('d/m/Y')}}
                                 @foreach($servidores as $autor)
                                   @if($autor->id == $obj->autor)
-                                    <h5 style="margin-bottom: -3px">Autor: {{$autor->nome}}</h5>
+                                    <h5 style="margin-bottom: -3px"><b>Autor:</b> {{$autor->nome}}</h5>
                                   @endif
                                 @endforeach
 
-                                <h5 style="margin-bottom: -3px">Inicio: {{$obj->data_inicio}}</h5>
-                                <h5>Fim: {{$obj->data_fim}}</h5>
+                                <h5 style="margin-bottom: -3px"><b>Inicio:</b> {{date('d/m/Y', strtotime($obj->data_inicio))}}</h5>
+                                <h5><b>Fim:</b> {{date('d/m/Y', strtotime($obj->data_fim))}}</h5>
 
                               </div>
                                 <div class="text-center">
@@ -62,7 +62,7 @@
                                                   <form class="" action="acao/{{$obj->id}}" method="POST">
                                                     <input type="hidden" name="autor" value="{{$obj->autor}}">
                                                     <h4><label for="nome">Nome</label> <input type="text" id="nome" value="{{$obj->nome}}" name="nome"></h4>
-                                                    <h4><label for="descricao">Descrição</label> <textarea rows="4" cols="30" id="descricao" name="descricao">{{$obj->descricao}}</textarea></h4>
+                                                    <h4><label for="descricao">Descrição</label> <textarea rows="4" cols="25" id="descricao" name="descricao">{{$obj->descricao}}</textarea></h4>
                                                     <h4><label for="inicio">Data início</label> <input type="date" id="inicio" value="{{$obj->data_inicio}}" name="data_inicio"></h4>
                                                     <h4><label for="fim">Data fim</label> <input type="date" id="fim" value="{{$obj->data_fim}}" name="data_fim"></h4>
                                                     <h4><label for="estado">Estado</label> <select style="width:180px" class="selectpicker" id="estado" name="estado">
@@ -100,18 +100,18 @@
                                                 </div>
                                                 <div class="modal-body">
                                                   <i class="material-icons" style="font-size:150px;">event</i><br>
-                                                  <h4>Nome: {{$obj->nome}}</h4>
+                                                  <h4><b>Nome:</b> {{$obj->nome}}</h4>
                                                   @foreach($servidores as $autor)
                                                     @if($autor->id == $obj->autor)
-                                                      <h4>Autor: {{$autor->nome}}</h4>
+                                                      <h4><b>Autor:</b> {{$autor->nome}}</h4>
                                                       @break
                                                     @endif
                                                   @endforeach
-                                                  <h4>Data da submissão: {{$obj->created_at->format('d/m/Y')}}</h4>
-                                                  <h4>Data de início: {{$obj->data_inicio}}</h4>
-                                                  <h4>Data de término: {{$obj->data_fim}}</h4>
-                                                  <h4>Descrição: {{$obj->descricao}}</h4>
-                                                  <h4>Estado: {{$obj->estado}}</h4>
+                                                  <h4><b>Data da submissão:</b> {{$obj->created_at->format('d/m/Y')}}</h4>
+                                                  <h4><b>Data de início:</b> {{date('d/m/Y', strtotime($obj->data_inicio))}}</h4>
+                                                  <h4><b>Data de término:</b> {{date('d/m/Y', strtotime($obj->data_fim))}}</h4>
+                                                  <h4><b>Descrição:</b></h4><h4 style="width: 250px; margin-left: 160px;"> {{$obj->descricao}}</h4>
+                                                  <h4><b>Estado:</b> {{$obj->estado}}</h4>
                                                   <div class="modal-footer">
                                                     <button class="btn btn-default" data-dismiss="modal">Fechar</button>
                                                   </div>
