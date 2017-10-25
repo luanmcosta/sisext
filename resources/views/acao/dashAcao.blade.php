@@ -48,10 +48,10 @@
                                         <input type="hidden" name="{{$obj->id}}" id="idBD">
                                     </form>
 
-                                    <a class="btn btn-info btn-sm" role="button" data-toggle="modal" data-target="#editar">
+                                    <a class="btn btn-info btn-sm" role="button" data-toggle="modal" data-target="#editar{{$obj->id}}">
                                             <i class="material-icons" title="Editar">create</i>
                                     </a>
-                                    <div class="modal fade" id="editar">
+                                    <div class="modal fade" id="editar{{$obj->id}}">
                                         <div class="modal-dialog"> <!--Coloca-se aqui os componentes modificadores do modal: modal-sm ou -lg-->
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -65,10 +65,12 @@
                                                     <h4><label for="descricao">Descrição</label> <textarea rows="4" cols="30" id="descricao" name="descricao">{{$obj->descricao}}</textarea></h4>
                                                     <h4><label for="inicio">Data início</label> <input type="date" id="inicio" value="{{$obj->data_inicio}}" name="data_inicio"></h4>
                                                     <h4><label for="fim">Data fim</label> <input type="date" id="fim" value="{{$obj->data_fim}}" name="data_fim"></h4>
-                                                    <h4><label for="estado">Estado</label> <select style="width:180px" class="form-control" id="estado">
-                                                      <option value="Estado1">Estado1</option>
-                                                      <option value="Estado2">Estado2</option>
-                                                      <option value="Estado3">Estado3</option>
+                                                    <h4><label for="estado">Estado</label> <select style="width:180px" class="selectpicker" id="estado" name="estado">
+                                                      <option value="Em análise">Em análise</option>
+                                                      <option value="Aprovada">Aprovada</option>
+                                                      <option value="Recusada">Recusada</option>
+                                                      <option value="Em andamento">Em andamento</option>
+                                                      <option value="Concluida">Concluida</option>
                                                     </select></h4>
                                                     {{method_field('PUT')}}
                                                     {{csrf_field()}}
@@ -86,10 +88,10 @@
                                         </div><!-- /.modal-dialog-->
                                     </div> <!-- /.modal-->
 
-                                    <a class="btn btn-success btn-sm" role="button" data-toggle="modal" data-target="#visualizar">
+                                    <a class="btn btn-success btn-sm" role="button" data-toggle="modal" data-target="#visualizar{{$obj->id}}">
                                         <i class="material-icons" title="Visualizar">remove_red_eye</i>
                                     </a>
-                                    <div class="modal fade" id="visualizar">
+                                    <div class="modal fade" id="visualizar{{$obj->id}}">
                                         <div class="modal-dialog"> <!--Coloca-se aqui os componentes modificadores do modal: modal-sm ou -lg-->
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -99,7 +101,12 @@
                                                 <div class="modal-body">
                                                   <i class="material-icons" style="font-size:150px;">event</i><br>
                                                   <h4>Nome: {{$obj->nome}}</h4>
-                                                  <h4>Autor: </h4>
+                                                  @foreach($servidores as $autor)
+                                                    @if($autor->id == $obj->autor)
+                                                      <h4>Autor: {{$autor->nome}}</h4>
+                                                      @break
+                                                    @endif
+                                                  @endforeach
                                                   <h4>Data da submissão: {{$obj->created_at->format('d/m/Y')}}</h4>
                                                   <h4>Data de início: {{$obj->data_inicio}}</h4>
                                                   <h4>Data de término: {{$obj->data_fim}}</h4>
