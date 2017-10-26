@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('admin/home');
 });
 
 Route::resource('relatorio', 'RelatorioController');

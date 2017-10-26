@@ -25,57 +25,32 @@
                             <div style="width:170px; margin-right: 10px;" class="col-xs-2 well well-sm">
                               <div class="text-center">
                                 <i class="material-icons" style="font-size:100px;">event</i><br>
-                                <h4 style="margin-top: -5px; margin-bottom: -3px">{{$obj->nome}}</h4>
+                                <h4 style="margin-top: -5px; margin-bottom: -3px"><b>{{$obj->nome}}</b></h4>
                                 {{$obj->created_at->format('d/m/Y')}}
                                 @foreach($servidores as $autor)
                                   @if($autor->id == $obj->autor)
-                                    <h5 style="margin-bottom: -3px">Autor: {{$autor->nome}}</h5>
+                                    <h5 style="margin-bottom: -3px"><b>Autor:</b> {{$autor->nome}}</h5>
                                   @endif
                                 @endforeach
 
-                                <h5 style="margin-bottom: -3px">Inicio: {{$obj->data_inicio}}</h5>
-                                <h5>Fim: {{$obj->data_fim}}</h5>
+                                <h5 style="margin-bottom: -3px"><b>Inicio:</b> {{date('d/m/Y', strtotime($obj->data_inicio))}}</h5>
+                                <h5><b>Fim:</b> {{date('d/m/Y', strtotime($obj->data_fim))}}</h5>
 
                               </div>
                                 <div class="text-center">
-                                    <a class="btn btn-success btn-sm" role="button" data-toggle="modal" data-target="#visualizar">
-                                        <i class="material-icons" title="Visualizar">remove_red_eye</i>
-                                    </a>
-                                    <div class="modal fade" id="visualizar">
-                                        <div class="modal-dialog"> <!--Coloca-se aqui os componentes modificadores do modal: modal-sm ou -lg-->
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title">Visualizar</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                  <i class="material-icons" style="font-size:150px;">event</i><br>
-                                                  <h4>Nome: {{$obj->nome}}</h4>
-                                                  <h4>Autor: </h4>
-                                                  <h4>Data da submissão: {{$obj->created_at->format('d/m/Y')}}</h4>
-                                                  <h4>Data de início: {{$obj->data_inicio}}</h4>
-                                                  <h4>Data de término: {{$obj->data_fim}}</h4>
-                                                  <h4>Descrição: {{$obj->descricao}}</h4>
-                                                  <h4>Estado: {{$obj->estado}}</h4>
-                                                  <div class="modal-footer">
-                                                    <button class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                  </div>
-                                                </div>
-                                                <!-- <div class="modal-footer">
-                                                    <button class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button class="btn btn-primary">Save</button>
-                                                </div> -->
-                                            </div><!-- /.modal-content-->
-                                        </div><!-- /.modal-dialog-->
-                                    </div> <!-- /.modal-->
-
-                                    <a class="btn btn-info btn-sm" role="button" data-toggle="modal" data-target="#editar">
-                                            <i class="material-icons" title="Editar">create</i>
+                                    <form action="{{route('admin.acao.destroy', $obj->id)}}" method="POST" style="display: inline-block;">
+                                        {{csrf_field()}}
+                                        {{method_field('DELETE')}}
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="material-icons" title="Deletar">delete</i>
                                         </button>
-                                    </a>
+                                        <input type="hidden" name="{{$obj->id}}" id="idBD">
+                                    </form>
 
+                                    <a class="btn btn-info btn-sm" role="button" data-toggle="modal" data-target="#editar{{$obj->id}}">
+                                            <i class="material-icons" title="Editar">create</i>
                                     </a>
-                                    <div class="modal fade" id="editar">
+                                    <div class="modal fade" id="editar{{$obj->id}}">
                                         <div class="modal-dialog"> <!--Coloca-se aqui os componentes modificadores do modal: modal-sm ou -lg-->
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -86,13 +61,15 @@
                                                   <form class="" action="{{route('admin.acao.update', $obj->id)}}"" method="POST">
                                                     <input type="hidden" name="autor" value="{{$obj->autor}}">
                                                     <h4><label for="nome">Nome</label> <input type="text" id="nome" value="{{$obj->nome}}" name="nome"></h4>
-                                                    <h4><label for="descricao">Descrição</label> <textarea rows="4" cols="30" id="descricao" name="descricao">{{$obj->descricao}}</textarea></h4>
+                                                    <h4><label for="descricao">Descrição</label> <textarea rows="4" cols="25" id="descricao" name="descricao">{{$obj->descricao}}</textarea></h4>
                                                     <h4><label for="inicio">Data início</label> <input type="date" id="inicio" value="{{$obj->data_inicio}}" name="data_inicio"></h4>
                                                     <h4><label for="fim">Data fim</label> <input type="date" id="fim" value="{{$obj->data_fim}}" name="data_fim"></h4>
-                                                    <h4><label for="estado">Estado</label> <select style="width:180px" class="form-control" id="estado">
-                                                      <option value="Estado1">Estado1</option>
-                                                      <option value="Estado2">Estado2</option>
-                                                      <option value="Estado3">Estado3</option>
+                                                    <h4><label for="estado">Estado</label> <select style="width:180px" class="selectpicker" id="estado" name="estado">
+                                                      <option value="Em análise">Em análise</option>
+                                                      <option value="Aprovada">Aprovada</option>
+                                                      <option value="Recusada">Recusada</option>
+                                                      <option value="Em andamento">Em andamento</option>
+                                                      <option value="Concluida">Concluida</option>
                                                     </select></h4>
                                                     {{method_field('PUT')}}
                                                     {{csrf_field()}}
@@ -106,14 +83,78 @@
                                         </div><!-- /.modal-dialog-->
                                     </div> <!-- /.modal-->
 
-                                    <form action="{{route('admin.acao.destroy', $obj->id)}}" method="POST" style="display: inline-block;">
-                                        {{csrf_field()}}
-                                        {{method_field('DELETE')}}
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            <i class="material-icons" title="Deletar">delete</i>
-                                        </button>
-                                        <input type="hidden" name="{{$obj->id}}" id="idBD">
-                                    </form>                                    
+                                    <a class="btn btn-success btn-sm" role="button" data-toggle="modal" data-target="#visualizar{{$obj->id}}">
+                                        <i class="material-icons" title="Visualizar">remove_red_eye</i>
+                                    </a>
+                                    <div class="modal fade" id="visualizar{{$obj->id}}">
+                                        <div class="modal-dialog"> <!--Coloca-se aqui os componentes modificadores do modal: modal-sm ou -lg-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title">Visualizar</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                  <i class="material-icons" style="font-size:150px;">event</i><br>
+                                                  <h4><b>Nome:</b> {{$obj->nome}}</h4>
+                                                  @foreach($servidores as $autor)
+                                                    @if($autor->id == $obj->autor)
+                                                      <h4><b>Autor:</b> {{$autor->nome}}</h4>
+                                                      @break
+                                                    @endif
+                                                  @endforeach
+                                                  <h4><b>Data da submissão:</b> {{$obj->created_at->format('d/m/Y')}}</h4>
+                                                  <h4><b>Data de início:</b> {{date('d/m/Y', strtotime($obj->data_inicio))}}</h4>
+                                                  <h4><b>Data de término:</b> {{date('d/m/Y', strtotime($obj->data_fim))}}</h4>
+                                                  <h4><b>Descrição:</b></h4><h4 style="width: 250px; margin-left: 160px;"> {{$obj->descricao}}</h4>
+                                                  <h4><b>Estado:</b> {{$obj->estado}}</h4>
+                                                  <div class="modal-footer">
+                                                    @if(date("Y-m-d") >= $obj->data_fim)
+                                                      <button type="submit" class="btn btn-success btn-sm" data-toggle="modal" data-target="#relatorio{{$obj->id}}">
+                                                          <i class="material-icons" title="Cadastrar Relatório">description</i>
+                                                      </button>
+                                                    @else
+                                                      <button type="submit" class="btn btn-success btn-sm" disabled>
+                                                          <i class="material-icons" title="Cadastrar Relatório">description</i>
+                                                      </button>
+                                                    @endif
+                                                    <button class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                                                  </div>
+                                                  <!--RELATORIO -->
+                                                  <div class="modal fade" id="relatorio{{$obj->id}}">
+                                                      <div class="modal-dialog"> <!--Coloca-se aqui os componentes modificadores do modal: modal-sm ou -lg-->
+                                                          <div class="modal-content">
+                                                              <div class="modal-header">
+                                                                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                                                  <h4 class="modal-title">Cadastrar relatório</h4>
+                                                              </div>
+                                                              <div class="modal-body">
+                                                                <form class="" action="#" method="POST">
+                                                                  <h4><label for="descricao">Descrição</label><br><textarea rows="8" cols="50" id="descricao" name="descricao"></textarea></h4>
+                                                                  @foreach($servidores as $autor)
+                                                                    @if($autor->id == $obj->autor)
+                                                                      <input type="hidden" name="autor" value="{{$autor->nome}}">
+                                                                      @break
+                                                                    @endif
+                                                                  @endforeach
+                                                                  <input type="hidden" name="acao" value="{{$obj->id}}">
+                                                                  {{csrf_field()}}
+                                                                  {{method_field("POST")}}
+                                                                  <div class="modal-footer">
+                                                                    <button class="btn btn-primary">Salvar</button>
+                                                                  </div>
+                                                                </form>
+                                                              </div>
+                                                              <!-- <div class="modal-footer">
+                                                                  <button class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                  <button class="btn btn-primary">Save</button>
+                                                              </div> -->
+                                                          </div><!-- /.modal-content-->
+                                                      </div><!-- /.modal-dialog-->
+                                                  </div> <!-- /.modal-->
+                                                </div>
+                                            </div><!-- /.modal-content-->
+                                        </div><!-- /.modal-dialog-->
+                                    </div> <!-- /.modal-->
                                 </div>
                             </div>
                         @endforeach
@@ -126,14 +167,14 @@
                                     <h4 class="modal-title">Cadastrar nova ação</h4>
                                 </div>
                                 <div class="modal-body">
-                                  <form class="" action="{{route('admin.acao.store')}}" method="POST">
-                                    <h4>Autor: <input type="text" name="autor"></h4>
-                                    <h4>Nome: <input type="text" name="nome"></h4>
-                                    <h4>Descricao: <input type="text" name="descricao"></h4>
-                                    <h4>Data início: <input type="date" name="data_inicio"></h4>
-                                    <h4>Data fim: <input type="date" name="data_fim"></h4>
-                                    <h4>Estado: <input type="text" name="estado"></h4>
 
+                                  <form class="" action="{{route('admin.acao.store')}}" method="POST">
+                                    <h4><label for="autor">Autor</label> <input type="text" id="autor" name="autor"></h4>
+                                    <h4><label for="nome">Nome</label> <input type="text" id="nome" name="nome"></h4>
+                                    <h4><label for="descricao">Descrição</label> <textarea rows="4" cols="30" id="descricao" name="descricao"></textarea></h4>
+                                    <h4><label for="inicio">Data início</label> <input type="date" id="inicio" name="data_inicio"></h4>
+                                    <h4><label for="fim">Data fim</label> <input type="date" id="fim" name="data_fim"></h4>
+                                    <input type="hidden" name="estado" value="Em análise">
                                     {{csrf_field()}}
                                     {{method_field("POST")}}
                                     <!-- <input type="submit" value="Cadastrar"> -->
