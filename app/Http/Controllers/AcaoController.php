@@ -41,7 +41,7 @@ class AcaoController extends Controller
       $this->acao->estado = $r->input('estado');
 
        $resp = $this->acao->save();
-        if($resp) return redirect()->route('acao.index');
+        if($resp) return redirect()->route('admin.acao.index');
        else echo "Erro ao tentar salvar";
     }
 
@@ -56,7 +56,7 @@ class AcaoController extends Controller
       $acao->estado = $r->input('estado');
 
       $resp = $acao->save();
-      if($resp) return redirect()->route('acao.index');
+      if($resp) return redirect()->route('admin.acao.index');
       else echo "Erro ao tentar atualizar";
     }
 
@@ -64,7 +64,7 @@ class AcaoController extends Controller
       $this->acao = Acao::find($id);
 
       $result = $this->acao->delete();
-      if($result) return redirect()->route('acao.index');
+      if($result) return redirect()->route('admin.acao.index');
       else echo "Não foi possível excluir";
     }
 }

@@ -5,16 +5,15 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard - Ações
+                <div class="panel-heading">Dashboard - <b>Ações</b>
                   <div class="text-right">
                     <button style="margin-top:-25px" class="btn btn-success" data-toggle="modal" data-target="#cadastra" style=" color: #FFF; margin-left: 15px;">
-                      Nova
+                      Novo registro
                     </button>
                   </div>
               </div>
 
-                <div style="margin-left: -5px" class="panel-body">
-
+                <div style="margin-left: 25px" class="panel-body">
                     @if(count($acoes)==0)
                         <div class="text-center" style="padding: 5px 0px;">
                             <h4>Não possui registos de <b>Ações</b></h4>
@@ -23,7 +22,7 @@
 
                     @else
                         @foreach($acoes as $obj)
-                            <div style="width:170px; margin-right: 10.5px;" class="col-xs-2 well well-sm">
+                            <div style="width:170px; margin-right: 10px;" class="col-xs-2 well well-sm">
                               <div class="text-center">
                                 <i class="material-icons" style="font-size:100px;">event</i><br>
                                 <h4 style="margin-top: -5px; margin-bottom: -3px"><b>{{$obj->nome}}</b></h4>
@@ -39,7 +38,7 @@
 
                               </div>
                                 <div class="text-center">
-                                    <form action="{{route('acao.destroy', $obj->id)}}" method="POST" style="display: inline-block;">
+                                    <form action="{{route('admin.acao.destroy', $obj->id)}}" method="POST" style="display: inline-block;">
                                         {{csrf_field()}}
                                         {{method_field('DELETE')}}
                                         <button type="submit" class="btn btn-danger btn-sm">
@@ -59,7 +58,7 @@
                                                     <h4 class="modal-title">Editar ação</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                  <form class="" action="acao/{{$obj->id}}" method="POST">
+                                                  <form class="" action="{{route('admin.acao.update', $obj->id)}}"" method="POST">
                                                     <input type="hidden" name="autor" value="{{$obj->autor}}">
                                                     <h4><label for="nome">Nome</label> <input type="text" id="nome" value="{{$obj->nome}}" name="nome"></h4>
                                                     <h4><label for="descricao">Descrição</label> <textarea rows="4" cols="25" id="descricao" name="descricao">{{$obj->descricao}}</textarea></h4>
@@ -80,10 +79,6 @@
                                                     </div>
                                                   </form>
                                                 </div>
-                                                <!-- <div class="modal-footer">
-                                                    <button class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button class="btn btn-primary">Save</button>
-                                                </div> -->
                                             </div><!-- /.modal-content-->
                                         </div><!-- /.modal-dialog-->
                                     </div> <!-- /.modal-->
@@ -172,7 +167,8 @@
                                     <h4 class="modal-title">Cadastrar nova ação</h4>
                                 </div>
                                 <div class="modal-body">
-                                  <form class="" action="{{route('acao.store')}}" method="POST">
+
+                                  <form class="" action="{{route('admin.acao.store')}}" method="POST">
                                     <h4><label for="autor">Autor</label> <input type="text" id="autor" name="autor"></h4>
                                     <h4><label for="nome">Nome</label> <input type="text" id="nome" name="nome"></h4>
                                     <h4><label for="descricao">Descrição</label> <textarea rows="4" cols="30" id="descricao" name="descricao"></textarea></h4>
@@ -187,10 +183,6 @@
                                     </div>
                                   </form>
                                 </div>
-                                <!-- <div class="modal-footer">
-                                    <button class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button class="btn btn-primary">Save</button>
-                                </div> -->
                             </div><!-- /.modal-content-->
                         </div><!-- /.modal-dialog-->
                     </div> <!-- /.modal-->

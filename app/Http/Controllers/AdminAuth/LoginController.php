@@ -9,6 +9,7 @@ use Hesto\MultiAuth\Traits\LogsoutGuard;
 use Illuminate\Http\Request;
 use App\Admin;
 
+
 class LoginController extends Controller
 {
     /*

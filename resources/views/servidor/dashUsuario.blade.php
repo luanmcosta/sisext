@@ -14,7 +14,7 @@
                         </button>                        
                     </div>
 
-
+ 
                     @if(count($usuarios)==0)
                         <div class="text-center" style="padding: 5px 0px;">
                             <h4>Não possui registos de <b>Usuários</b> no sistema.</h4>
