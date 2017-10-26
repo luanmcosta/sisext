@@ -12,10 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('admin/home');
 });
 
-Route::resource('acao', 'AcaoController');
 Route::resource('relatorio', 'RelatorioController');
 
 Route::group(['prefix' => 'admin'], function () {
