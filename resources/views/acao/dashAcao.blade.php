@@ -113,7 +113,16 @@
                                                   <h4><b>Descrição:</b></h4><h4 style="width: 250px; margin-left: 160px;"> {{$obj->descricao}}</h4>
                                                   <h4><b>Estado:</b> {{$obj->estado}}</h4>
                                                   <div class="modal-footer">
-                                                    <button class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                    @if(date("Y-m-d") >= $obj->data_fim)
+                                                      <button type="submit" class="btn btn-success btn-sm">
+                                                          <i class="material-icons" title="Cadastrar Relatório">description</i>
+                                                      </button>
+                                                    @else
+                                                      <button type="submit" class="btn btn-success btn-sm" disabled>
+                                                          <i class="material-icons" title="Cadastrar Relatório">description</i>
+                                                      </button>
+                                                    @endif
+                                                    <button class="btn btn-danger" data-dismiss="modal">Fechar</button>
                                                   </div>
                                                 </div>
                                                 <!-- <div class="modal-footer">
@@ -141,11 +150,7 @@
                                     <h4><label for="descricao">Descrição</label> <textarea rows="4" cols="30" id="descricao" name="descricao"></textarea></h4>
                                     <h4><label for="inicio">Data início</label> <input type="date" id="inicio" name="data_inicio"></h4>
                                     <h4><label for="fim">Data fim</label> <input type="date" id="fim" name="data_fim"></h4>
-                                    <h4><label for="estado">Estado</label> <select style="width:180px" class="form-control" id="estado">
-                                      <option value="">Estado1</option>
-                                      <option value="">Estado2</option>
-                                      <option value="">Estado3</option>
-                                    </select></h4>
+                                    <input type="hidden" name="estado" value="Em análise">
                                     {{csrf_field()}}
                                     {{method_field("POST")}}
                                     <!-- <input type="submit" value="Cadastrar"> -->
