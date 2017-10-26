@@ -38,14 +38,36 @@
 
                               </div>
                                 <div class="text-center">
-                                    <form action="{{route('admin.acao.destroy', $obj->id)}}" method="POST" style="display: inline-block;">
-                                        {{csrf_field()}}
-                                        {{method_field('DELETE')}}
-                                        <button type="submit" class="btn btn-danger btn-sm">
-                                            <i class="material-icons" title="Deletar">delete</i>
-                                        </button>
-                                        <input type="hidden" name="{{$obj->id}}" id="idBD">
-                                    </form>
+                                    <a class="btn btn-success btn-sm" role="button" data-toggle="modal" data-target="#visualizar">
+                                        <i class="material-icons" title="Visualizar">remove_red_eye</i>
+                                    </a>
+                                    <div class="modal fade" id="visualizar">
+                                        <div class="modal-dialog"> <!--Coloca-se aqui os componentes modificadores do modal: modal-sm ou -lg-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title">Visualizar</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                  <i class="material-icons" style="font-size:150px;">event</i><br>
+                                                  <h4>Nome: {{$obj->nome}}</h4>
+                                                  <h4>Autor: </h4>
+                                                  <h4>Data da submissão: {{$obj->created_at->format('d/m/Y')}}</h4>
+                                                  <h4>Data de início: {{$obj->data_inicio}}</h4>
+                                                  <h4>Data de término: {{$obj->data_fim}}</h4>
+                                                  <h4>Descrição: {{$obj->descricao}}</h4>
+                                                  <h4>Estado: {{$obj->estado}}</h4>
+                                                  <div class="modal-footer">
+                                                    <button class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                  </div>
+                                                </div>
+                                                <!-- <div class="modal-footer">
+                                                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button class="btn btn-primary">Save</button>
+                                                </div> -->
+                                            </div><!-- /.modal-content-->
+                                        </div><!-- /.modal-dialog-->
+                                    </div> <!-- /.modal-->
 
                                     <a class="btn btn-info btn-sm" role="button" data-toggle="modal" data-target="#editar">
                                             <i class="material-icons" title="Editar">create</i>
@@ -84,36 +106,14 @@
                                         </div><!-- /.modal-dialog-->
                                     </div> <!-- /.modal-->
 
-                                    <a class="btn btn-success btn-sm" role="button" data-toggle="modal" data-target="#visualizar">
-                                        <i class="material-icons" title="Visualizar">remove_red_eye</i>
-                                    </a>
-                                    <div class="modal fade" id="visualizar">
-                                        <div class="modal-dialog"> <!--Coloca-se aqui os componentes modificadores do modal: modal-sm ou -lg-->
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title">Visualizar</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                  <i class="material-icons" style="font-size:150px;">event</i><br>
-                                                  <h4>Nome: {{$obj->nome}}</h4>
-                                                  <h4>Autor: </h4>
-                                                  <h4>Data da submissão: {{$obj->created_at->format('d/m/Y')}}</h4>
-                                                  <h4>Data de início: {{$obj->data_inicio}}</h4>
-                                                  <h4>Data de término: {{$obj->data_fim}}</h4>
-                                                  <h4>Descrição: {{$obj->descricao}}</h4>
-                                                  <h4>Estado: {{$obj->estado}}</h4>
-                                                  <div class="modal-footer">
-                                                    <button class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                  </div>
-                                                </div>
-                                                <!-- <div class="modal-footer">
-                                                    <button class="btn btn-default" data-dismiss="modal">Close</button>
-                                                    <button class="btn btn-primary">Save</button>
-                                                </div> -->
-                                            </div><!-- /.modal-content-->
-                                        </div><!-- /.modal-dialog-->
-                                    </div> <!-- /.modal-->
+                                    <form action="{{route('admin.acao.destroy', $obj->id)}}" method="POST" style="display: inline-block;">
+                                        {{csrf_field()}}
+                                        {{method_field('DELETE')}}
+                                        <button type="submit" class="btn btn-danger btn-sm">
+                                            <i class="material-icons" title="Deletar">delete</i>
+                                        </button>
+                                        <input type="hidden" name="{{$obj->id}}" id="idBD">
+                                    </form>                                    
                                 </div>
                             </div>
                         @endforeach
