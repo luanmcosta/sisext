@@ -18,7 +18,7 @@ class RedirectIfServidor
 	public function handle($request, Closure $next, $guard = 'servidor')
 	{
 	    if (Auth::guard($guard)->check()) {
-	        return redirect('servidor/home');
+	        return redirect('servidor/');
 	    }
 
 	    return $next($request);
