@@ -1,17 +1,6 @@
 <?php
 
-Route::get('/home', function () {
-    // $users[] = Auth::user();
-    // $users[] = Auth::guard()->user();
-    // $users[] = Auth::guard('servidor')->user();
-
-    //dd($users);
-
-    return view('servidor.home');
-})->name('home');
-
-Route::get('acao', 'AcaoController@index');
-
-Route::get('/create', 'ServidorController@create');
-
-Route::get('/show','ServidorController@show');
+Route::get('acao', 'ServidorController@listarAcoes');
+Route::put('acao/{acao}', 'AcaoController@update')->name('acao.update');
+Route::delete('acao/{acao}', 'AcaoController@destroy')->name('acao.destroy');
+Route::post('novo', 'AcaoController@store')->name('acao.store');

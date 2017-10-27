@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\servidor;
+use App\Acao;
+use Auth;
 
 class ServidorController extends Controller
 {
@@ -12,8 +15,9 @@ class ServidorController extends Controller
 		$this->servidorObj = $serv;
 	}
 	
-	public function index(){		
-		echo "PAGINA INICIAL";
+	public function index(){
+		$usuarios = Servidor::all();		
+		return view('servidor.listar')->with('serv', $usuarios);
 	}
 	
 	public function show(){
@@ -25,17 +29,28 @@ class ServidorController extends Controller
 	public function create(){
 		return view('servidor.InserirServidor');
 	}
+
+	public function listarAcoes(){
+      $acoes = Acao::where('autor', Auth::guard('servidor')->user()->id)->get();
+      
+      return view('servidor.dashAcao')->with('acoes', $acoes);
+    }
+
 	
 	public function store(Request $r){
 		$serv = new servidor;
 		
 		$serv->nome = $r->input('nome');
-		$serv->senha = $r->input('senha');
+		$serv->telefone = $r->input('telefone');
+		$serv->cargo = $r->input('cargo');
+		$serv->siap = $r->input('siap');
+		$serv->email = $r->input('email');
+		$serv->senha = Hash::make($r->input('senha'));
 		
 		
 		$resp = $serv->save();
 		if($resp){
-			return redirect()->route('servidor.index');
+			return redirect()->route('admin.servidor.index');
 		}
 		return "Erro ao inserir";
 	}
@@ -52,13 +67,15 @@ class ServidorController extends Controller
 		$serv->cargo = $r->input('cargo');
 		$serv->telefone = $r->input('telefone');
 		$serv->email = $r->input('email');
-		$serv->senha = $r->input('senha');
+		if ($r->input('senha')!=''){
+			$serv->senha = Hash::make($r->input('senha'));
+		}
 		$serv->SIAP = $r->input('siap');
 		
 		$resp = $serv->save();
 		
 		if($resp){
-			return redirect()->route('servidor.index');
+			return redirect()->route('admin.servidor.index');
 		}
 		else{
 			echo "Erro ao tentar atualizar!";
@@ -70,7 +87,7 @@ class ServidorController extends Controller
 		$result = $serv->delete();
 		
 		if($result){
-			return redirect()->route('servidor.index');
+			return redirect()->route('admin.servidor.index');
 		}
 		else{
 			echo "Não foi possível excluir!";
