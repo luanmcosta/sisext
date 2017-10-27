@@ -12,12 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('admin/home');
+    return view('welcome');
 });
 
 Route::resource('relatorio', 'RelatorioController');
 
 Route::group(['prefix' => 'admin'], function () {
+  Route::get('/', function(){
+    if(Auth::guard('admin')->check())
+      return redirect('/admin/home');
+    else
+      return redirect('/admin/login');
+  })->name('login');
   Route::get('/login', 'AdminAuth\LoginController@showLoginForm')->name('login');
   Route::post('/login', 'AdminAuth\LoginController@login');
   Route::post('/logout', 'AdminAuth\LoginController@logout')->name('logout');

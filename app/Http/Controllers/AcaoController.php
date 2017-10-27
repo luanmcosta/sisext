@@ -40,9 +40,8 @@ class AcaoController extends Controller
       $this->acao->data_fim = $r->input('data_fim');
       $this->acao->estado = $r->input('estado');
 
-       $resp = $this->acao->save();
-        if($resp) return redirect()->route('admin.acao.index');
-       else echo "Erro ao tentar salvar";
+      $resp = $this->acao->save();
+      return $resp;
     }
 
     public function update(Request $r, $id){

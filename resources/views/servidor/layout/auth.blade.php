@@ -36,7 +36,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/admin/home') }}">
-                    {{ config('app.name', 'Laravel Multi Auth Guard') }}: Admin
+                    {{ config('app.name', 'Laravel Multi Auth Guard') }}: Servidor
                 </a>
             </div>
 
@@ -53,8 +53,8 @@
                         <li><a href="{{ url('/servidor/login') }}">Login</a></li>
                         <li><a href="{{ url('/servidor/register') }}">Registro</a></li>
                     @else
-                        <li><a href="home"><i class="material-icons">home</i> Home</a></li>
-                        <li><a href="acao"><i class="material-icons">event</i> Ações</a></li>
+                        <li><a href="{{ url('/servidor') }}"><i class="material-icons">home</i> Home</a></li>
+                        <li><a href="{{ url('/servidor/acao') }}"><i class="material-icons">event</i> Ações</a></li>
                         <li><a href="#"><i class="material-icons">build</i> Configurações</a></li>
                         <li class="dropdown">
 

@@ -8,7 +8,7 @@
                 <div class="panel-heading">Usuários do sistema</div>
 
                 <div class="panel-body">
-                    <form action = "{{url('admin/servidor/update/'.$serv->id)}}" method = "POST">
+                    <form action = "{{url('servidor/update/'.$serv->id)}}" method = "POST">
 			{{csrf_field()}}
 			<h3> SERVIDOR </h3></br>
 			Nome: 			<input type = "text" value = "{{$serv->nome}}" name = "nome"/></br>

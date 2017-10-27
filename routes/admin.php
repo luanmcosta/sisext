@@ -1,24 +1,19 @@
 <?php
 
 
-Route::get('/home', function () {
-    return view('admin.home');
-})->name('home');
+Route::get('acao', 'AdminController@listarAcoes')->name('acao.index');
+Route::put('acao/{acao}', 'AdminController@atualizarAcao')->name('acao.update');
+Route::delete('acao/{acao}', 'AdminController@deletarAcao')->name('acao.destroy');
+Route::post('novo', 'AdminController@salvarAcao')->name('acao.store');
 
-Route::get('acao', 'AcaoController@index')->name('acao.index');
-Route::put('acao/{acao}', 'AcaoController@update')->name('acao.update');
-Route::delete('acao/{acao}', 'AcaoController@destroy')->name('acao.destroy');
-Route::post('novo', 'AcaoController@store')->name('acao.store');
-
-
-Route::get('/', 'AdminController@index')->name('index');
+Route::get('/home', 'AdminController@index')->name('index');
 
 Route::get('/edit/{id}','AdminController@edit');
 	
 Route::post('/update/{id}','AdminController@update');
 
 Route::prefix('servidor')->group(function () {
-	Route::get('/', 'ServidorController@index')->name('servidor.index');
+	Route::get('/', 'AdminController@listarServidores')->name('servidor.index');
 
 	Route::get('/create', 'ServidorController@create');
 
@@ -32,3 +27,5 @@ Route::prefix('servidor')->group(function () {
 	
 	Route::delete('/destroy/{id}','ServidorController@destroy');
 });
+
+Route::post('/admin/sair', 'ServidorController@sair');

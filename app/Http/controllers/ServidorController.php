@@ -15,9 +15,8 @@ class ServidorController extends Controller
 		$this->servidorObj = $serv;
 	}
 	
-	public function index(){
-		$usuarios = Servidor::all();		
-		return view('servidor.listar')->with('serv', $usuarios);
+	public function index(){	
+		return view('servidor.dashUsuario');
 	}
 	
 	public function show(){
@@ -30,13 +29,6 @@ class ServidorController extends Controller
 		return view('servidor.InserirServidor');
 	}
 
-	public function listarAcoes(){
-      $acoes = Acao::where('autor', Auth::guard('servidor')->user()->id)->get();
-      
-      return view('servidor.dashAcao')->with('acoes', $acoes);
-    }
-
-	
 	public function store(Request $r){
 		$serv = new servidor;
 		
@@ -93,4 +85,33 @@ class ServidorController extends Controller
 			echo "Não foi possível excluir!";
 		}
 	}
+
+
+	/////////////////////////
+	public function listarAcoes(){
+      $acoes = Acao::where('autor', Auth::guard('servidor')->user()->id)->get();
+      return view('servidor.dashAcao')->with('acoes', $acoes);
+    }
+
+    public function adicionarAcao(Request $request){
+		$r = \App::call('App\Http\Controllers\AcaoController@store', [$request]);
+		if($r)
+			return redirect('/servidor/acao');
+		return redirect('/servidor/acao');
+	}
+
+    public function atualizarAcao(Request $request, $id){
+		$r = \App::call('App\Http\Controllers\AcaoController@update', ['r' => $request, 'id' => $id]);
+		if($r)
+			return redirect('/servidor/acao');
+		return redirect('/servidor/acao');
+	}
+	
+	public function deletarAcao($id){
+		$r = \App::call('App\Http\Controllers\AcaoController@destroy', ['id' => $id]);
+		if($r)
+			return redirect('/servidor/acao');
+		return redirect('/servidor/acao');
+	}
+	
 }

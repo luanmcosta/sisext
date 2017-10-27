@@ -32,7 +32,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    public $redirectTo = '/admin/home';
+    public $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -75,5 +75,14 @@ class LoginController extends Controller
     protected function guard()
     {
         return Auth::guard('admin');
+    }
+
+    public function sair(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return redirect('/admin/login');
     }
 }

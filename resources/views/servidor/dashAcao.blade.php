@@ -151,8 +151,8 @@
                                 </div>
                                 <div class="modal-body">
 
-                                  <form class="" action="{{route('admin.acao.store')}}" method="POST">
-                                    <h4><label for="autor">Autor</label> <input type="text" id="autor" name="autor"></h4>
+                                  <form class="" action="{{route('servidor.acao.store')}}" method="POST">
+                                    <h4><label for="autor">Autor</label> <input type="hidden" value="{{Auth::guard('servidor')->user()->id }}" id="autor" name="autor">{{Auth::guard('servidor')->user()->nome }}</h4>
                                     <h4><label for="nome">Nome</label> <input type="text" id="nome" name="nome"></h4>
                                     <h4><label for="descricao">Descrição</label> <textarea rows="4" cols="30" id="descricao" name="descricao"></textarea></h4>
                                     <h4><label for="inicio">Data início</label> <input type="date" id="inicio" name="data_inicio"></h4>
